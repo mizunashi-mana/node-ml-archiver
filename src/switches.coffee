@@ -27,13 +27,12 @@ parser.on 'help', () ->
 parser.on 'global-config', (name, value) ->
   options.gconfig_path = value
 
-parser.on '*', (opt, value) ->
-  console.log 'error: illegal options ' + opt
-  console.log 'See help:'
-  console.log parser.toString()
-  options.help_printed = true
-
 module.exports = (optstrs) ->
   assert Array.isArray(optstrs), "options is not array!"
-  parser.parse optstrs
+
+  try
+    parser.parse optstrs
+  catch e
+    console.log e
+    console.log parser.toString()
   options

@@ -1,6 +1,7 @@
 DEBUG = 1
 
 options = require('./switches')
+
 options = options(process.argv)
 console.log options
 
