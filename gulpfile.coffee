@@ -1,12 +1,9 @@
-gulp = require 'gulp'
+'use strict'
 
-browserify = require 'browserify'
-source = require 'vinyl-source-stream'
+gulp = require 'gulp'
+coffee = require 'gulp-coffee'
 
 gulp.task 'script', ->
-    browserify
-        entries: ['./src/main.coffee']
-        extensions: ['.coffee']
-    .bundle()
-    .pipe source 'app.js'
-    .pipe gulp './'
+  gulp.src './src/**/*.coffee'
+    .pipe coffee()
+    .pipe gulp.dest './build'
