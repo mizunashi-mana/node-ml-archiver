@@ -4,6 +4,7 @@ OPT_SWITCHES = [
   ['-h', '--help', "Shows this help."]
   ['-g', '--global-config FILE', "Apply own global config."]
   ['-c', '--config FILE', 'Apply local config']
+  ['-t', '--test', 'Only test configs']
 ]
 
 assert = require('assert')
@@ -16,6 +17,7 @@ options = {
   debug: true
   gconfig_path: undefined
   config_path: undefined
+  only_testconfig: false
   help_printed: false
 }
 
@@ -25,6 +27,9 @@ parser.on 'debug', () ->
 parser.on 'help', () ->
   console.log parser.toString()
   options.help_printed = true
+
+parser.on 'test', () ->
+  options.only_testconfig = true
 
 parser.on 'global-config', (name, value) ->
   options.gconfig_path = value
@@ -39,5 +44,6 @@ module.exports = (optstrs) ->
   catch e
     console.log e
     console.log parser.toString()
-  assert !options.help_printed && options.config_path, "not set config file"
+  assert options.help_printed || options.only_testconfig || options.config_path,
+    "not set config file"
   options
