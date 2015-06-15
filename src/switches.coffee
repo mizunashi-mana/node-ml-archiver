@@ -12,7 +12,7 @@ parser = new optparse.OptionParser(OPT_SWITCHES)
 parser.banner = HELP_BANNER
 
 options = {
-  debug: false
+  debug: true
   gconfig_path: undefined
   help_printed: false
 }
@@ -29,7 +29,6 @@ parser.on 'global-config', (name, value) ->
 
 module.exports = (optstrs) ->
   assert Array.isArray(optstrs), "options is not array!"
-
   try
     parser.parse optstrs
   catch e

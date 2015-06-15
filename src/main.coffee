@@ -1,17 +1,15 @@
-DEBUG = 1
-
 options = require('./switches')
 
 options = options(process.argv)
-console.log options
-
-gconfig = {
-  path: "../config/config.js"
-  data: ""
-}
-gconfig.data = require(gconfig.path)
+console.log options if options.debug
 
 if options.help_printed
-  console.log 'help'
+  process.exit(1)
 else
-  console.log 'success'
+  gconfig = {
+    path: options.gconfig_path || "../config/config.js"
+    data: ""
+  }
+  gconfig.data = require(gconfig.path)
+  console.log gconfig if options.debug
+  
