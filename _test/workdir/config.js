@@ -1,17 +1,19 @@
 var config = {
   admin: "root",
   /** ベースのディレクトリ */
-  basedir: "./",
+  basedir: "",
+  /** コンフィグファイルの場所 */
+  configdir: "config/",
   /** メールデータの保存ディレクトリ */
-  articledir: "./article/",
+  articledir: "article/",
   /** メール番号 */
-  sequence: "./article/sequence",
+  sequence: "article/sequence",
   /** 情報ディレクトリ */
-  vardir: "./var/",
+  vardir: "var/",
   /** ログの保存先 */
-  infolog: ["./var/ml-info.log"],
+  infolog: ["var/ml-info.log"],
   /** エラーログの保存先 */
-  errorlog: ["./var/ml-error.log"],
+  errorlog: ["var/ml-error.log"],
   /** gzip圧縮を行うか */
   is_gzipcomp: true,
   /** メールのディレクトリ構造形式 */
@@ -20,7 +22,8 @@ var config = {
 
 (function(){
   config.admin = 'owner-test-ml';
-  config.basedir = "./";
+  config.basedir = "";
+  config.configdir = config.basedir + "config/";
   config.articledir = config.basedir + "article/";
   config.sequence = config.articledir + "sequence";
   config.vardir = config.basedir + "var/";
