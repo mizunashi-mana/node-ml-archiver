@@ -3,6 +3,7 @@ OPT_SWITCHES = [
   ['-d', '--debug', "Run with debug mode."]
   ['-h', '--help', "Shows this help."]
   ['-g', '--global-config FILE', "Apply own global config."]
+  ['-c', '--config FILE', 'Apply local config']
 ]
 
 assert = require('assert')
@@ -14,6 +15,7 @@ parser.banner = HELP_BANNER
 options = {
   debug: true
   gconfig_path: undefined
+  config_path: undefined
   help_printed: false
 }
 
@@ -27,6 +29,9 @@ parser.on 'help', () ->
 parser.on 'global-config', (name, value) ->
   options.gconfig_path = value
 
+parser.on 'config', (name, value) ->
+  options.config_path = value
+
 module.exports = (optstrs) ->
   assert Array.isArray(optstrs), "options is not array!"
   try
@@ -34,4 +39,5 @@ module.exports = (optstrs) ->
   catch e
     console.log e
     console.log parser.toString()
+  assert !options.help_printed && options.config_path, "not set config file"
   options

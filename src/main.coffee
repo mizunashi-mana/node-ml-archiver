@@ -12,4 +12,9 @@ else
   }
   gconfig.data = require(gconfig.path)
   console.log gconfig if options.debug
-  
+  lconfig = {
+    path: options.config_path
+    data: ""
+  }
+  lconfig.data = require(lconfig.path)
+  console.log lconfig if options.debug
